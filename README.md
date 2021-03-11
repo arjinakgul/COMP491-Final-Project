@@ -1,6 +1,6 @@
 # COMP491-Final-Project
 ## Team Members:
-### Arda Duman
-### Arjin Renas Akgül
-### Cansu Doğanay
-### Elhan Oğuz
+### Arda Duman - @ard6
+### Arjin Renas Akgül - @arjinakgul
+### Cansu Doğanay - @cansudoganay
+### Elhan Oğuz - @elhanoguzz
