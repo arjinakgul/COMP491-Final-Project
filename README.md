@@ -1,3 +1,4 @@
+#Crypto Currency Manipulation Detection: Technical Analysis
 # COMP491-Final-Project
 ## Team Members:
 ### Arda Duman - @ard6
