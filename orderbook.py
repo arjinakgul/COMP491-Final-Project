@@ -36,6 +36,7 @@ def process_messageBTC(msg):
 
 
 ethusdt = bm.start_depth_socket("ETHUSDT", process_messageETH,interval=100)
+btcusdt = bm.start_depth_socket("BTCUSDT", process_messageBTC,interval=100)
 
 
 bm.start()
