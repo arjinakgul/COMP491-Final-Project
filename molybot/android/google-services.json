@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "992863160410",
+    "project_id": "molybot-650c9",
+    "storage_bucket": "molybot-650c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992863160410:android:5a1ae4c8605f89e5d77063",
+        "android_client_info": {
+          "package_name": "com.example.molybot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992863160410-ufuhoqov2uiskrg1fj2uqoqrp55uf03s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRNLKfjEESuMBSzwwPph5C3hP6P_d9sYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992863160410-ufuhoqov2uiskrg1fj2uqoqrp55uf03s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
