@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/coin_screen.dart';
 import '../models/trade.dart';
 import 'package:provider/provider.dart';
+import './rate.dart';
 
 class TradeItem extends StatefulWidget {
   @override
@@ -12,6 +13,10 @@ class _TradeItemState extends State<TradeItem> {
   @override
   Widget build(BuildContext context) {
     final trade = Provider.of<Trade>(context);
+    final String _coinName = trade.coin.substring(0,3);
+    int index = 0;
+    _coinName == "BTC" ? index = 0 : index = 1;
+    //final String rate = Rate(_coinName).toString();
     return Card(
         margin: EdgeInsets.symmetric(
           vertical: 6,
@@ -49,7 +54,7 @@ class _TradeItemState extends State<TradeItem> {
                 },
                 color: 
                 trade.isAlarm ? Colors.orange[300] : Colors.white,),
-              Text(trade.rate.toString(), style: TextStyle(color: Colors.white))
+              Rate(index)
           ],        
           ),),
         ),
