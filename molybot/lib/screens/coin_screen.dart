@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:provider/provider.dart';
 import '../providers/trades.dart';
 
-import '../widgets/chart.dart';
+import '../widgets/coin_table.dart';
 class Coin extends StatefulWidget {
 
   static const routeName = "/coin";
@@ -22,6 +23,9 @@ class _CoinState extends State<Coin> {
 
     final coinName = ModalRoute.of(context).settings.arguments;
     final trade = trades.findByCoin(coinName);
+    final String _coinName = trade.coin.substring(0,3);
+    int index = 0;
+    _coinName == "BTC" ? index = 0 : index = 1;
     return Scaffold(
       backgroundColor: Color.fromRGBO(112, 112, 112, 0.15),
       appBar: AppBar(
@@ -75,7 +79,29 @@ class _CoinState extends State<Coin> {
         Container(
           child: Padding(
             padding: const EdgeInsets.all(32),
-            child: Chart(),
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+              .collection("rates")
+              .snapshots(),
+              builder: (ctx, AsyncSnapshot<QuerySnapshot> tmp){
+                if (tmp.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final tmpDocs = tmp.data.docs;
+              final test = tmpDocs[index];
+              return CoinTable(
+                test["change"].toString(), 
+                test["weightedAvgPrice"].toString(), 
+                test["highPrice"].toString(), 
+                test["lowPrice"].toString(), 
+                test[
+                  index==0 ? "volumeBTC"
+                  : "volumeETH"
+                ].toString(), 
+                test["volumeUSDT"].toString());
+              })
           )
         ),
         Container(child: Text("ORDER BOOKS", style: TextStyle(color: Colors.white)))

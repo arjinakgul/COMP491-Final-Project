@@ -1,7 +1,6 @@
 {
   "project_info": {
     "project_number": "992863160410",
-    "firebase_url": "https://molybot-650c9-default-rtdb.firebaseio.com",
     "project_id": "molybot-650c9",
     "storage_bucket": "molybot-650c9.appspot.com"
   },
@@ -30,13 +29,6 @@
             {
               "client_id": "992863160410-ufuhoqov2uiskrg1fj2uqoqrp55uf03s.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "992863160410-4bai5uimpfo65ka1im0evi9g9rhjc56l.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.molybot"
-              }
             }
           ]
         }
