@@ -72,8 +72,29 @@ class _CoinState extends State<Coin> {
           ],
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Container(
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.grey[900],
+                ),
+                child: Center(
+                  child: Text(
+                    'exchange rate',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.grey[100],
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Container(
                 child: Padding(
                     padding: const EdgeInsets.all(32),
