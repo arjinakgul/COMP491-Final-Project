@@ -5,7 +5,7 @@ class Profile extends StatelessWidget {
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
   }
-
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class Profile extends StatelessWidget {
             backgroundImage: AssetImage('assets/images/molybotBlack.png'),
           ),
           Text(
-            "Kullanıcı Adı",
+            "Username",
             style: TextStyle(
               fontFamily: 'Source Sans Pro',
               fontSize: 40,
@@ -52,7 +52,7 @@ class Profile extends StatelessWidget {
                 color: Colors.pink,
               ),
               title: Text(
-                'Buraya email alalım',
+                user.email.toString(),
                 style: TextStyle(
                   color: Colors.pink,
                   fontFamily: 'Source Sans Pro',
