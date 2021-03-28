@@ -31,7 +31,7 @@ class _CoinState extends State<Coin> {
             padding: const EdgeInsets.all(10.0),
             child: ClipOval(
               child: Image.asset(
-                'assets/images/monopolyUncle.jpg',
+                'assets/images/molybotBlack.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,31 +75,30 @@ class _CoinState extends State<Coin> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             StreamBuilder<Object>(
-              stream: null,
-              builder: (context, snapshot) {
-                return Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey[900],
-                    ),
-                    child: Center(
-                      child: Text(
-                        'exchange rate',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.grey[100],
+                stream: null,
+                builder: (context, snapshot) {
+                  return Padding(
+                    padding: const EdgeInsets.all(32),
+                    child: Container(
+                      height: 60,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[900],
+                      ),
+                      child: Center(
+                        child: Text(
+                          'exchange rate',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.grey[100],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }
-            ),
+                  );
+                }),
             Container(
                 child: Padding(
                     padding: const EdgeInsets.all(32),

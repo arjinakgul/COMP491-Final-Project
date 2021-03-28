@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             radius: 50.0,
-            backgroundImage: AssetImage('assets/images/monopolyUncle.jpg'),
+            backgroundImage: AssetImage('assets/images/molybotBlack.png'),
           ),
           Text(
             "Kullanıcı Adı",
