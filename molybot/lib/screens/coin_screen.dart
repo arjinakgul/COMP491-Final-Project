@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/trades.dart';
 
 import '../widgets/coin_table.dart';
+import '../widgets/rate.dart';
 
 class Coin extends StatefulWidget {
   static const routeName = "/coin";
@@ -29,12 +30,12 @@ class _CoinState extends State<Coin> {
           elevation: 5,
           leading: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/molybotBlack.png',
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child:
+                    Icon(Icons.arrow_back_ios_outlined, color: Colors.white)),
           ),
           backgroundColor: Colors.black87,
           actions: [
@@ -86,16 +87,7 @@ class _CoinState extends State<Coin> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.grey[900],
                       ),
-                      child: Center(
-                        child: Text(
-                          'exchange rate',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.grey[100],
-                          ),
-                        ),
-                      ),
+                      child: Center(child: Rate(index, 36.0)),
                     ),
                   );
                 }),
