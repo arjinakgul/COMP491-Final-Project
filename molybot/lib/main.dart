@@ -44,13 +44,17 @@ class MyApp extends StatelessWidget {
             routes: 
           {
           Coin.routeName: (ctx) => Coin(),
+          MainScreen.routeName: (ctx) => MainScreen()
           },
           title: 'Molybot',
           
           home: appSnapshot.connectionState != ConnectionState.done ? Center(
                   child: CircularProgressIndicator()) : StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (ctx, userSnapshot) {
             if (userSnapshot.connectionState == ConnectionState.waiting) {
-              return Text("Waiting");
+              return Center(
+                  child: CircularProgressIndicator(
+                    value: 12,
+                  )) ;
             }
             if (userSnapshot.hasData) {
               return MainScreen();

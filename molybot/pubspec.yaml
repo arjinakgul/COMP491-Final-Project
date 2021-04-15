@@ -24,9 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.3.3
-  # web_socket_channel: ^2.0.0
-  # charts_flutter: ^0.10.0
-  syncfusion_flutter_charts: ^18.4.47
+  
   firebase_auth: ^1.0.1
   cloud_firestore: ^1.0.1
   firebase_core: ^1.0.1
@@ -53,8 +51,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/molybotBlack.png
-   
+    - assets/images/monopolyUncle.jpg
+    - assets/images/molybot_logo.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -67,11 +66,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-  - family: Source Sans Pro
-    fonts:
-    - asset: fonts/SourceSansPro-Regular.ttf
-      
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

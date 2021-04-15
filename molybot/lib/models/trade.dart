@@ -15,6 +15,14 @@ class Trade with ChangeNotifier{
     notifyListeners();
   }
 
+  void setAlarm(int alarm){
+    this.isAlarm = 
+      alarm == 1
+      ? true
+      : false;
+    notifyListeners();
+  }
+
   void favorite(){
     isFavorite = !isFavorite;
     notifyListeners();

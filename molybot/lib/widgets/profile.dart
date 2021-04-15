@@ -17,7 +17,7 @@ class Profile extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             radius: 50.0,
-            backgroundImage: AssetImage('assets/images/molybotBlack.png'),
+            backgroundImage: AssetImage('assets/images/molybot_logo.png'),
           ),
           Text(
             user.displayName,

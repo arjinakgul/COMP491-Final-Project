@@ -1,9 +1,12 @@
 import 'dart:ui';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/trade_list.dart';
 import './profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
+
+  static const routeName = "/main";
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -21,8 +24,10 @@ class _MainScreenState extends State<MainScreen> {
     //print(_selectedIndex);
   }
 
+  
   @override
   Widget build(BuildContext context) {
+    //final String name = FirebaseAuth.instance.currentUser.email;
     return Scaffold(
       backgroundColor: Color.fromRGBO(112, 112, 112, 0.15),
       appBar: AppBar(
@@ -32,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ClipOval(
-              child: Image.asset('assets/images/monopolyUncle.jpg', fit: BoxFit.cover,),
+              child: Image.asset('assets/images/molybot_logo.png', fit: BoxFit.cover,),
         ),
             ),
         backgroundColor: Colors.black87,
