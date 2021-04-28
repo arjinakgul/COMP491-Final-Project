@@ -137,8 +137,6 @@ class _TradeItemState extends State<TradeItem> {
                 trade.isAlarm ? Colors.orange[300] : Colors.white,),
                 ],
               ),
-              
-              
           ],        
           ),),
         ),
