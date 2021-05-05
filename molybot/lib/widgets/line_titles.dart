@@ -11,7 +11,7 @@ class LineTitles {
           getTextStyles: (value) => const TextStyle(
             color: Color(0xff68737d),
             fontWeight: FontWeight.bold,
-            fontSize: 12,
+            fontSize: 10,
           ),
           getTitles: (value) {
             switch (value.toInt()) {
@@ -44,7 +44,7 @@ class LineTitles {
           getTextStyles: (value) => const TextStyle(
             color: Color(0xff67727d),
             fontWeight: FontWeight.bold,
-            fontSize: 5,
+            fontSize: 7,
           ),
           getTitles: (value) {
             // switch (value.toInt()) {
@@ -58,7 +58,7 @@ class LineTitles {
             return value.toString();
           },
           reservedSize: 10,
-          margin: 12,
+          margin: 20,
         ),
       );
 }
