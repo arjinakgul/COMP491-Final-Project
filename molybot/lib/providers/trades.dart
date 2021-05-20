@@ -23,7 +23,9 @@ class Trades with ChangeNotifier{
 
   List<Trade> get favItems {
     
+    
     return _trades.where((element) => element.isFavorite).toList();
+
   }
 
   Trade findByCoin(String coinName){

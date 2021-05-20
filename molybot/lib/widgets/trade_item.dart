@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import '../screens/coin_screen.dart';
 import '../models/trade.dart';
 import 'package:provider/provider.dart';
@@ -16,23 +18,51 @@ class _TradeItemState extends State<TradeItem> {
 
   final uid = FirebaseAuth.instance.currentUser.uid;
   int btcAlarm, ethAlarm;
-
+  final _fbm = FirebaseMessaging.instance;
   @override
   void initState() {
-    // TODO: implement initState    
+    // TODO: implement initState
+    
+    _fbm.requestPermission();
+    FirebaseMessaging.onMessage.listen((message) {
+      print(message);
+      return;
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+       print(message);
+      return;
+    });
+    
     super.initState();
     _fetchData();
+    //_notify();
+    if(ethAlarm!=null && ethAlarm == 1)
+      _fbm.subscribeToTopic("alarm");
   }
    
   Future<void> _fetchData() async{
     final userData = await FirebaseFirestore.instance
     .collection("users").doc(uid).get();
+    
+    
     setState(() {
       btcAlarm = userData["btcAlarm"];
       ethAlarm = userData["ethAlarm"];
     
     });
   }
+
+  // Future <void> _notify() async{
+  //   if(ethAlarm == 1){
+  //     setState(() {
+  //       _fbm.subscribeToTopic('alarm');
+  //     });
+  //   }
+  //     setState(() {
+        
+  //     _fbm.unsubscribeFromTopic('alarm');
+  //     });
+  // }
 
   void _toggleBTC(){
     if(btcAlarm==0) btcAlarm=1;
@@ -43,14 +73,21 @@ class _TradeItemState extends State<TradeItem> {
                   "btcAlarm": btcAlarm
                 });
   }
-  void _toggleETH(){
-    if(ethAlarm==0) ethAlarm=1;
-    else ethAlarm=0;
+  
+  void _toggleETH() {
+    if (ethAlarm == 0){
+      _fbm.subscribeToTopic('alarm');
+      ethAlarm = 1;
+    }   
+    else{
+      _fbm.unsubscribeFromTopic('alarm');
+      ethAlarm = 0;
+    }
+      
     FirebaseFirestore.instance
-                .collection("users").doc(uid)
-                .update({
-                  "ethAlarm": ethAlarm
-                });
+        .collection("users")
+        .doc(uid)
+        .update({"ethAlarm": ethAlarm});
   }
 
 
@@ -137,6 +174,8 @@ class _TradeItemState extends State<TradeItem> {
                 trade.isAlarm ? Colors.orange[300] : Colors.white,),
                 ],
               ),
+              
+              
           ],        
           ),),
         ),

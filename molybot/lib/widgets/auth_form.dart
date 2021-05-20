@@ -63,7 +63,7 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.pink[400]),
+                      labelStyle: TextStyle(color: Colors.grey),
                       labelText: "Email Adress"
                     ),
                     onSaved: (value){
@@ -79,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
                       }else return null;
                     },
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.pink[400]),
+                      labelStyle: TextStyle(color: Colors.grey),
                       labelText: "Username"
                     ),
                     onSaved: (value){
@@ -95,7 +95,7 @@ class _AuthFormState extends State<AuthForm> {
                       }else return null;
                     },
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.pink[400]),
+                      labelStyle: TextStyle(color: Colors.grey),
                       labelText: "Password",
                     ),
                     obscureText: true,
@@ -108,7 +108,7 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.pinkAccent[400],
+                      primary: Colors.grey,
                       shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(20.0),
                     ),),
@@ -124,7 +124,7 @@ class _AuthFormState extends State<AuthForm> {
                     child: Text(
                       _isLogin ? "Create new account" 
                       : "I already have an account",
-                      style: TextStyle(color: Colors.pink[400]),))
+                      style: TextStyle(color: Colors.grey),))
                 ],
               ),
             ),),

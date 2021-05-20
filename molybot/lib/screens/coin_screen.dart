@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:molybot/widgets/graph.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 import '../providers/trades.dart';
@@ -17,14 +19,28 @@ class Coin extends StatefulWidget {
 
 class _CoinState extends State<Coin> {
   final uid = FirebaseAuth.instance.currentUser.uid;
+  final _fbm = FirebaseMessaging.instance;
   int btcAlarm;
   int ethAlarm;
-
   @override
   void initState() {
     // TODO: implement initState
+    
+    _fbm.requestPermission();
+    FirebaseMessaging.onMessage.listen((message) {
+      print(message);
+      return;
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+       print(message);
+      return;
+    });
+    
     super.initState();
     _fetchData();
+    //_notify();
+    if(ethAlarm!=null && ethAlarm == 1)
+      _fbm.subscribeToTopic("alarm");
   }
 
   Future<void> _fetchData() async {
@@ -35,6 +51,12 @@ class _CoinState extends State<Coin> {
       ethAlarm = userData["ethAlarm"];
     });
   }
+
+  // Future <void> _notify(){
+  //   if(ethAlarm == 1)
+  //     _fbm.subscribeToTopic('alarm');
+  //   _fbm.unsubscribeFromTopic('alarm');
+  // }
 
   void _toggleBTC() {
     if (btcAlarm == 0)
@@ -48,10 +70,15 @@ class _CoinState extends State<Coin> {
   }
 
   void _toggleETH() {
-    if (ethAlarm == 0)
+    if (ethAlarm == 0){
+      _fbm.subscribeToTopic('alarm');
       ethAlarm = 1;
-    else
+    }   
+    else{
+      _fbm.unsubscribeFromTopic('alarm');
       ethAlarm = 0;
+    }
+      
     FirebaseFirestore.instance
         .collection("users")
         .doc(uid)
@@ -133,32 +160,149 @@ class _CoinState extends State<Coin> {
               )
             ],
           ),
-          body: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("rates").snapshots(),
-              builder: (ctx, AsyncSnapshot<QuerySnapshot> tmp) {
-                if (tmp.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final tmpDocs = tmp.data.docs;
-                final test = tmpDocs[index];
-                final positive = test["change"] < 0 ? false : true;
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.all(40),
-                        child: Center(
-                          child: Text(
-                            test["rate"].toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 24),
+          body: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 1,
+                    child: StreamBuilder(
+                    stream:
+                        FirebaseFirestore.instance.collection("rates").snapshots(),
+                    builder: (ctx, AsyncSnapshot<QuerySnapshot> tmp) {
+                      if (tmp.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      final tmpDocs = tmp.data.docs;
+                      final test = tmpDocs[index];
+                      final positive = test["change"] < 0 ? false : true;
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(32, 12, 8, 12),
+                          child: Container(
+                            padding: EdgeInsets.all(22),
+                            decoration: BoxDecoration(
+                            color: Colors.grey[900], borderRadius: BorderRadius.circular(15)),
+                            height: 160,
+                            child: Center(
+                              child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Current Rate",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
                           ),
-                        )),
-                    Container(
+                        ),
+                        Text(test["rate"].toString(),
+                            style: TextStyle(
+                              color: Colors.white, 
+                              fontSize: 18)),
+                        Text(
+                          "Change",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(test["change"].toString()+"%",
+                            style: TextStyle(
+                              color: positive ? Colors.green : Colors.red[600], 
+                              fontSize: 18)),
+                      ],
+                    ),),
+                          ),
+                        );
+                      }
+                    ),
+                  ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child: StreamBuilder(
+                  stream: 
+                  FirebaseFirestore.instance.collection("alarm")
+                  .orderBy("time",descending: false).snapshots(),
+                  builder: (ctx, AsyncSnapshot<QuerySnapshot> tmp) {
+                      if (tmp.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                   }
+                   final tmpDocs = tmp.data.docs;
+                   final test = tmpDocs[tmpDocs.length-1];
+                   final lastAlarm = test["time"];
+                   final r = Timestamp.fromMillisecondsSinceEpoch(lastAlarm.toInt());
+                   final q = DateTime.fromMillisecondsSinceEpoch(r.microsecondsSinceEpoch);
+                   final hour = DateFormat.jm().format(q);
+                   final date = DateFormat.MMMEd().format(q);
+                   return Padding(
+                     padding: const EdgeInsets.fromLTRB(
+                       8, 12, 32, 12),
+                     child: Container(
+                       padding: EdgeInsets.all(22),
+                       decoration: BoxDecoration(
+                       color: Colors.grey[900], borderRadius: BorderRadius.circular(15)),
+                       height: 160,
+                       child: Center(child: 
+                       Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:
+                       [
+                        Text(
+                          "Last Alarm",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 6,),
+                        Text(
+                          index == 1 ?
+                          hour.toString()
+                          : "No recent alarms",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18)),
+                        Text(
+                          index == 1 ?
+                          date.toString()
+                          : "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18)),
+                        SizedBox(height: 6,) 
+                      ],)
+                       )
+                     ),
+                   );
+                  }),
+                ),
+                ],
+              ),              
+              StreamBuilder(
+                  stream:
+                      FirebaseFirestore.instance.collection("rates").snapshots(),
+                  builder: (ctx, AsyncSnapshot<QuerySnapshot> tmp) {
+                    if (tmp.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    final tmpDocs = tmp.data.docs;
+                    final test = tmpDocs[index];
+                    final positive = test["change"] < 0 ? false : true;
+                    return Container(
                         child: Padding(
-                            padding: const EdgeInsets.all(32),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 32
+                            ),
                             child: CoinTable(
                                 positive,
                                 test["change"].toString(),
@@ -168,17 +312,21 @@ class _CoinState extends State<Coin> {
                                 test[index == 0 ? "volumeBTC" : "volumeETH"]
                                     .toString(),
                                 test["volumeUSDT"].toString(),
-                                _coinName))),
-                    Container(
-                      width: 438,
+                                _coinName)));
+                  }),
+                  Container(
+                      width: 400,
                       child: Padding(
-                        padding: const EdgeInsets.all(32),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 32
+                        ),
                         child: LineChartWidget(),
                       ),
                     ),
-                  ],
-                );
-              })),
+            ],
+          )
+              ),
     );
   }
 }

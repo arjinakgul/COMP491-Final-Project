@@ -10,7 +10,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.black87,
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
             backgroundImage: AssetImage('assets/images/molybot_logo.png'),
           ),
           Text(
-            user.displayName,
+            user.displayName.toString(),
             style: TextStyle(
               fontFamily: 'Source Sans Pro',
               fontSize: 40,
@@ -34,7 +34,7 @@ class Profile extends StatelessWidget {
               fontFamily: 'Source Sans Pro',
               fontSize: 18.0,
               letterSpacing: 2.0,
-              color: Colors.pink.shade300,
+              color: Colors.grey,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -50,12 +50,12 @@ class Profile extends StatelessWidget {
             child: ListTile(
               leading: Icon(
                 Icons.mail_rounded,
-                color: Colors.pink,
+                color: Colors.grey,
               ),
               title: Text(
                 user.email.toString(),
                 style: TextStyle(
-                  color: Colors.pink,
+                  color: Colors.grey,
                   fontFamily: 'Source Sans Pro',
                   fontSize: 20.0,
                 ),
@@ -63,15 +63,18 @@ class Profile extends StatelessWidget {
             ),
           ),
           Container(
+            
             child: Center(
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    ),
                 onPressed: _signOut,
                 child: Text(
                   "Log out!",
-                  style: TextStyle(color: Colors.pink),
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 22),
                 ),
               ),
             ),

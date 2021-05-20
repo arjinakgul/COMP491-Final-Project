@@ -28,92 +28,14 @@ class CoinTable extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "Change",
-                          style: TextStyle(
-                            color: Colors.white54,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text("${change}%",
-                            style: TextStyle(
-                              color: positive ? Colors.green : Colors.red[600], 
-                              fontSize: 18)),
-                      ],
-                    ),
-                  ),
-                ),
-                VerticalDivider(
-                  thickness: 3,
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
                           "High",
                           style: TextStyle(
                             color: Colors.white54,
                             fontSize: 12,
                           ),
                         ),
+                        SizedBox(height:12),
                         Text(high,
-                            style: TextStyle(color: Colors.white, fontSize: 18)),
-                      ],
-                    ),
-                  ),
-                ),
-                VerticalDivider(
-                  thickness: 3,
-
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "Volume (${coinName})",
-                          style: TextStyle(
-                            color: Colors.white54,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text(vCoin,
-                            style: TextStyle(color: Colors.white, fontSize: 18)),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            thickness: 3,
-          ),
-          IntrinsicHeight(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Center(
-                             child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "Average",
-                          style: TextStyle(
-                            color: Colors.white54,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text(average,
                             style: TextStyle(color: Colors.white, fontSize: 18)),
                       ],
                     ),
@@ -136,7 +58,65 @@ class CoinTable extends StatelessWidget {
                             fontSize: 12,
                           ),
                         ),
+                        SizedBox(height:12),
                         Text(low,
+                            style: TextStyle(color: Colors.white, fontSize: 18)),
+                      ],
+                    ),
+                  ),
+                ),
+                VerticalDivider(
+                  thickness: 3,
+
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                       Text(
+                          "Average",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height:12),
+                        Text(average,
+                            style: TextStyle(color: Colors.white, fontSize: 18)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            thickness: 3,
+          ),
+          IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "Volume (${coinName})",
+                          style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height:12),
+                        Text(vCoin,
                             style: TextStyle(color: Colors.white, fontSize: 18)),
                       ],
                     ),
@@ -160,6 +140,7 @@ class CoinTable extends StatelessWidget {
 
                           ),
                         ),
+                        SizedBox(height:12),
                         Text(vUSDT,
                             softWrap: true,
                             style: TextStyle(color: Colors.white, fontSize: 18)),
